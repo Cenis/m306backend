@@ -1,0 +1,244 @@
+openapi: 3.0.3
+info:
+  title: FitnessTest GIBZ
+  version: 1.0.0
+  description: Welcome to the FitnessTest GIBZ API documentation. This API belongs to the FitnessCheck Project and is designed to store data from the frontend into a database. Every request to the API requires authentication via JWT (JSON Web Token).
+paths:
+  /twelve-minutes-run:
+    post:
+      summary: Store a new entry for the 12 Minutes Run discipline.
+      operationId: addTwelveMinutesRun
+      requestBody:
+        description: Contains the result in specified units and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/twelve_minutes_run'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+  /shuttle-run:
+    post:
+      summary: Store a new entry for shuttle run.
+      operationId: addShuttleRun
+      requestBody:
+        description: Contains the result in milliseconds and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/shuttle_run'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+  /one-leg-stand:
+    post:
+      summary: Store a new entry for one leg stand.
+      operationId: addOneLegStand
+      requestBody:
+        description: Contains the result in seconds and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/one_leg_stand'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+  /standing-long-jump:
+    post:
+      summary: Store a new entry for standing long jump.
+      operationId: addStandingLongJump
+      requestBody:
+        description: Contains the result in centimeters and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/standing_long_jump'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+  /medicine-ball-throw:
+    post:
+      summary: Store a new entry for medicine ball throw.
+      operationId: addMedicineBallThrow
+      requestBody:
+        description: Contains the result in centimeters and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/medicine_ball_throw'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+  /core-strength:
+    post:
+      summary: Store a new entry for core strength.
+      operationId: addCoreStrength
+      requestBody:
+        description: Contains the result in seconds and the class_id to assign the result to a class, job, and year.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/core_strength'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad request - Invalid input format
+        '401':
+          description: Unauthorized - Missing or invalid authentication token
+        '403':
+          description: Forbidden - User does not have permission to perform the operation
+        '422':
+          description: Unprocessable Entity - Invalid input or Validation exception
+
+components:
+  schemas:
+    twelve_minutes_run:
+      required:
+        - result_in_rounds
+        - class_id
+      type: object
+      properties:
+        result_in_rounds:
+          type: integer
+          format: int64
+          example: 17
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+
+    shuttle_run:
+      required:
+        - result_in_milliseconds
+        - class_id
+      type: object
+      properties:
+        result_in_milliseconds:
+          type: integer
+          format: int64
+          example: 17890
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+
+    one_leg_stand:
+      required:
+        - result_in_seconds
+        - class_id
+      type: object
+      properties:
+        result_in_seconds:
+          type: integer
+          format: int64
+          example: 25
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+
+    standing_long_jump:
+      required:
+        - result_in_centimeters
+        - class_id
+      type: object
+      properties:
+        result_in_centimeters:
+          type: integer
+          format: int64
+          example: 180
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+
+    medicine_ball_throw:
+      required:
+        - result_in_centimeters
+        - class_id
+      type: object
+      properties:
+        result_in_centimeters:
+          type: integer
+          format: int64
+          example: 300
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+
+    core_strength:
+      required:
+        - result_in_seconds
+        - class_id
+      type: object
+      properties:
+        result_in_seconds:
+          type: integer
+          format: int64
+          example: 40
+        class_id:
+          type: integer
+          format: int64
+          example: 123456
+          
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []

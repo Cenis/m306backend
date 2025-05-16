@@ -1,0 +1,32 @@
+[
+    {
+        "gender": "m",
+        "discipline": "CoreStrength",
+        "result": 0,
+        "expectedPoints": 0
+    },
+    {
+        "gender": "m",
+        "discipline": "CoreStrength",
+        "result": 12,
+        "expectedPoints": 2
+    },
+    {
+        "gender": "m",
+        "discipline": "CoreStrength",
+        "result": 20,
+        "expectedPoints": 4
+    },
+    {
+        "gender": "m",
+        "discipline": "CoreStrength",
+        "result": 290,
+        "expectedPoints": 25
+    },
+    {
+        "gender": "m",
+        "discipline": "CoreStrength",
+        "result": 423,
+        "expectedPoints": 25
+    }
+]

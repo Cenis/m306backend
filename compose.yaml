@@ -1,0 +1,40 @@
+# This composition is intended for isolated, local development only!
+
+services:
+  fitness-check:
+    build: .
+    container_name: fitness-check
+    networks:
+      - gibzapp
+    ports:
+      - 8008:8080
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /app/google_application_default_credentials.json
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__MariaDb: Server=fitness-check-db;Database=fitnesscheck;User=gibzapp;Password=password
+      Authentication__Schemes__Bearer__SigningKeys__0__Issuer: dotnet-user-jwts
+      Authentication__Schemes__Bearer__SigningKeys__0__Value: RB/+6n4ZbOqRK8fjFyN+mUearTsx06UErDL+NI9wfvE=
+    volumes:
+      - ./google_application_default_credentials.json:/app/google_application_default_credentials.json
+      - ~/.vsdbg:/remote_debugger:rw
+    depends_on:
+      - fitness-check-db
+
+  # Note: If the database creation is not working, delete the dockerVolumes folder and try again
+  fitness-check-db:
+    image: mysql:8.0
+    container_name: fitness-check-db
+    networks:
+      - gibzapp
+    ports:
+      - 13308:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fitnesscheck
+      MYSQL_USER: gibzapp
+      MYSQL_PASSWORD: password
+    volumes:
+      - ~/dockerVolumes/gibzapp/fitnesscheck/mysql:/var/lib/mysql
+networks:
+  gibzapp:
